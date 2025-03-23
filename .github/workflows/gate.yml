@@ -1,22 +1,22 @@
-1| name: "@PR • Gate"
-2| run-name: "@Gate triggered by ${{ github.actor }} ${{ format('on branch {0}', github.head_ref || github.ref) }}"
-3| 
-4| on:
-5|   pull_request:
-6|     branches:
-7|       - develop
-8|       - main
-9|       - release
-10|       - hotfix
-11|   merge_group:
-12| 
-13| concurrency:
-14|   group: ${{ github.workflow }}-${{ github.ref }}
-15|   cancel-in-progress: ${{ github.ref_name != 'develop' }}
-16| 
-17| env:
-18|   number: ${{ github.event.pull_request.number || -1 }}
-19|   head_sha: ${{ github.event.pull_request.head.sha || github.event.merge_group.head_sha }}
-20|   head_branch: ${{ github.event.pull_request.head.ref || github.event.merge_group.head_ref }}
-21|   base_sha: ${{ github.event.pull_request.base.sha || github.event.merge_group.base_sha }}
-22|   base_branch: ${{ github.event.pull_request.base.ref || github.event ▋
+name: "@PR • Gate"
+run-name: "@Gate triggered by ${{ github.actor }} ${{ format('on branch {0}', github.head_ref || github.ref) }}"
+
+on:
+  pull_request:
+    branches:
+      - develop
+      - main
+      - release
+      - hotfix
+  merge_group:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.ref_name != 'develop' }}
+
+env:
+  number: ${{ github.event.pull_request.number || -1 }}
+  head_sha: ${{ github.event.pull_request.head.sha || github.event.merge_group.head_sha }}
+  head_branch: ${{ github.event.pull_request.head.ref || github.event.merge_group.head_ref }}
+  base_sha: ${{ github.event.pull_request.base.sha || github.event.merge_group.base_sha }}
+  base_branch: ${{ github.event.pull_request.base.ref || github.event.merge_group.base_ref }}
