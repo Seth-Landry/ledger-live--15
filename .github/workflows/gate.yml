@@ -43,13 +43,10 @@ jobs:
           script: |
             const head_branch = "${{ env.head_branch }}";
             const base_branch = "${{ env.base_branch }}";
-
             const newHeadBranch = head_branch.replace("refs/heads/", "");
             const newBaseBranch = base_branch.replace("refs/heads/", "");
-
             core.exportVariable("head_branch", newHeadBranch)
             core.exportVariable("base_branch", newBaseBranch)
-
       - uses: ./tools/actions/turbo-affected
         id: affected
         with:
@@ -61,7 +58,7 @@ jobs:
             const fs = require("fs");
             const affected = ${{ steps.affected.outputs.affected }};
             fs.writeFileSync("affected.json", JSON.stringify(affected), "utf-8");
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: affected.json
           path: affected.json
@@ -79,7 +76,7 @@ jobs:
               base_owner: "${{ env.base_owner }}",
               is_fork: ${{ env.is_fork }}
             }), "utf-8");
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: pr_metadata.json
           path: pr_metadata.json
