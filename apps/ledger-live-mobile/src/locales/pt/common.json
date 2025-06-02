@@ -4,6 +4,8 @@
   },
   "common" : {
     "cancel" : "Cancelar",
+    "copy" : "Copiar",
+    "copied" : "Copiado",
     "apply" : "Aplicar",
     "seeAll" : "Ver tudo",
     "seeAllWithNumber" : "Ver todos ({{number}})",
@@ -100,7 +102,8 @@
       "times" : "x{{ value }}"
     },
     "quote" : "Cotação",
-    "tryAgain" : "Tente novamente"
+    "tryAgain" : "Tente novamente",
+    "ldmkEnabled" : "Transporte LDMK habilitado"
   },
   "errors" : {
     "ReplacementTransactionUnderpriced" : {
@@ -509,6 +512,10 @@
     "NotEnoughBalance" : {
       "title" : "Fundos Insuficientes",
       "description" : "Certifique-se de que a conta tem fundos suficientes."
+    },
+    "NotEnoughBalanceFees" : {
+      "title" : "Fundos insuficientes para cobrir as taxas",
+      "description" : "Certifique-se de que a conta tenha fundos suficientes."
     },
     "NotEnoughBalanceForUnstaking" : {
       "message" : "Atualmente, seu saldo (fora de staking) disponível é de {{currentBalance}}, que é insuficiente para pagar as taxas de rede necessárias para desaplicar {{assetName}}. ",
@@ -1060,6 +1067,15 @@
     },
     "AppManifestNotFoundError" : {
       "title" : "Falha ao carregar o aplicativo Swap Live"
+    },
+    "InvalidMemoMina" : {
+      "title" : "O texto do memo não pode ter mais de 32 caracteres"
+    },
+    "AccountCreationFeeWarning" : {
+      "title" : "Esta transação incorrerá em uma taxa de criação de conta de {{fee}}"
+    },
+    "AmountTooSmall" : {
+      "title" : "A quantia mínima exigida para esta transação é {{amount}}"
     }
   },
   "crash" : {
@@ -1090,6 +1106,32 @@
     "openSettings" : "Abra as configurações de localização",
     "tryEnablingAgain" : "Tente habilitar a localização novamente",
     "noInfos" : "A Ledger não acessa suas informações de localização."
+  },
+  "earn" : {
+    "deposit" : {
+      "protocolInfoModal" : {
+        "title" : "Para escolher um protocolo, aqui está o que você precisa levar em conta:",
+        "items" : {
+          "protocol" : {
+            "highlighted" : "Um protocolo",
+            "description" : " é uma plataforma que permite que você ganhe recompensas usando suas criptomoedas depositadas para empréstimo, liquidez ou staking."
+          },
+          "apy" : {
+            "highlighted" : "APY (Rendimento Percentual Anual)",
+            "description" : " é o valor dos juros que você pode ganhar em um ano. Um APY mais alto significa ganhos mais altos."
+          },
+          "tvl" : {
+            "highlighted" : "TVL (Valor total bloqueado)",
+            "description" : " é o total de dinheiro depositado no protocolo por outros usuários. Um TVL mais alto significa que o protocolo tem a confiança de mais pessoas."
+          },
+          "strategy" : {
+            "highlighted" : "Estratégia",
+            "description0" : " é o método que um protocolo usa para gerar recompensas para você.",
+            "description1" : "Por exemplo, se um protocolo usa o empréstimo como estratégia, ele empresta sua stablecoin depositada a tomadores de empréstimo. Assim, você ganha juros que variam de acordo com a demanda."
+          }
+        }
+      }
+    }
   },
   "permissions" : {
     "open" : "Abrir permissões do aplicativo",
@@ -2590,7 +2632,8 @@
       "gasLimit" : "Limite de gas",
       "id" : "Id",
       "autoClaimedRewards" : "Recompensas automaticamente resgatadas",
-      "stakedAmount" : "Quantia aplicada"
+      "stakedAmount" : "Quantia aplicada",
+      "accountCreationFee" : "Taxa de Criação de Conta"
     },
     "multipleAddresses" : "Por que múltiplos endereços?",
     "tokenName" : "Nome do token",
@@ -3155,7 +3198,7 @@
     "debug" : {
       "title" : "Debug",
       "desc" : "Use por sua própria conta e risco – Ferramentas de desenvolvedor",
-      "featureFlagsTitle" : "Marcadores definidos usados no Ledger Live",
+      "featureFlagsTitle" : "Marcadores de recursos definidos usados no Ledger Live",
       "featureFlagsDesc" : "Valores sobrepostos serão redefinidos se o aplicativo for reexecutado. Apenas strings JSON válidas serão aceitas.",
       "featureFlagsEdit" : "Editar",
       "featureFlagsRestore" : "Restaurar",
@@ -3526,6 +3569,8 @@
         "contact_support" : "Entre em contato com o suporte",
         "ton_title" : "A Ledger Nano S™ não é compatível com a troca de Ton",
         "ton_description" : "Para trocar Ton, use qualquer outro dispositivo Ledger compatível, como a Ledger Nano S Plus™, Ledger Nano X™, Ledger Flex™ ou Ledger Stax™.",
+        "ton_tokens_title" : "A Ledger Nano S™ não é compatível com trocas de tokens Ton",
+        "ton_tokens_description" : "Para trocar tokens Ton, use qualquer outro dispositivo Ledger compatível, como a Ledger Nano S Plus™, Ledger Nano X™, Ledger Flex™ ou Ledger Stax™.",
         "spl_tokens_title" : "A Ledger Nano S™ não é compatível com a troca de tokens Solana",
         "spl_tokens_description" : "Para trocar tokens Solana, use qualquer outro dispositivo Ledger compatível, como a Ledger Nano S Plus™, Ledger Nano X™, Ledger Flex™ ou Ledger Stax™.",
         "near_title" : "A Ledger Nano S™ não é compatível com trocas de Near",
@@ -3806,6 +3851,9 @@
         }
       }
     },
+    "spl2022" : {
+      "splExtensionsWarning" : "Você está interagindo com um token que faz parte do programa Token-2022, também conhecido como Token Extensions. Este token tem riscos específicos. <0>Clique aqui</0> para saber mais."
+    },
     "amount" : {
       "available" : "Total Disponível",
       "useMax" : "Usar o máximo",
@@ -4047,7 +4095,9 @@
       "desc" : "Você tem certeza de que quer cancelar a adição de contas?",
       "v2" : {
         "title" : "Cancelar adição de conta?",
-        "desc" : "Nenhuma conta será adicionada ao Ledger Live."
+        "desc" : "Nenhuma conta será adicionada ao Ledger Live.",
+        "continue" : "Continuar adicionando",
+        "cancel" : "Cancelar"
       }
     },
     "imported" : "Ativos adicionados com sucesso",
@@ -4656,7 +4706,7 @@
   },
   "FirmwareUpdateReleaseNotes" : {
     "introTitle" : "Atualize a {{deviceName}} para a versão {{version}}",
-    "recoveryPhraseBackupInstructions" : "Certifique-se de que sua frase de recuperação de 24 palavras esteja anotada na folha de recuperação e esteja disponível, como precaução.",
+    "recoveryPhraseBackupInstructions" : "Como precaução, certifique-se de que sua frase de recuperação secreta de 24 palavras está anotada na folha de recuperação e disponível.\n\nConsidere usar o Ledger Recover para fazer backup do acesso à sua carteira e garantir que ela esteja sempre ao seu alcance.",
     "confirmRecoveryPhrase" : "Eu tenho minha frase de recuperação",
     "introDescription1" : "Note que todos os aplicativos em seu dispositivo serão excluídos. Você pode reinstalar seus aplicativos após a atualização do firmware.",
     "introDescription2" : "Isso não afeta seus criptoativos.",
@@ -6041,6 +6091,7 @@
       "transferFees" : {
         "title" : "Taxas de transferência",
         "feesPercentHint" : "O token tem {{feePercent}}% de taxa de transferência ({{feeBps}}bps) ({{maxFee}} máximo)",
+        "feesHint" : "Taxa de transferência do token: {{transferFee}}",
         "notice" : "Taxa de transferência {{fee}}%",
         "tooltipHint" : "Porcentagem da transferência retida para o criador do token"
       },
@@ -6099,6 +6150,9 @@
         }
       }
     }
+  },
+  "mina" : {
+    "memoPlaceholder" : "Memo opcional"
   },
   "near" : {
     "info" : {
@@ -6425,7 +6479,9 @@
     },
     "stepVerification" : {
       "action" : "Confirme a operação em seu dispositivo",
-      "accountName" : "Nome da conta"
+      "accountName" : "Nome da conta",
+      "title" : "Continue na sua Ledger {{wording}}",
+      "description" : "Siga as instruções exibidas na sua Tela Touch Segura."
     }
   },
   "notificationCenter" : {
@@ -6609,8 +6665,8 @@
       "7d" : "7D",
       "30d" : "30D",
       "1y" : "1A",
-      "1H_label" : "1H",
       "1D_label" : "1D",
+      "1H_label" : "1H",
       "1W_label" : "1S",
       "1M_label" : "1M",
       "1Y_label" : "1A"
@@ -7092,9 +7148,9 @@
     },
     "activation" : {
       "screen" : {
-        "title" : "Ativar o Ledger Sync para esse telefone?",
-        "description" : "Isso sincroniza automaticamente suas contas cripto em todos os seus telefones e computadores, mesmo ao fazer uma transição para um novo dispositivo.",
-        "mainCta" : "Ative o Ledger Sync",
+        "title" : "Ativar o Ledger Sync neste smartphone?",
+        "description" : "Isso vai sincronizar suas contas cripto automaticamente por todos os seus smartphones e computadores, mesmo ao trocar de dispositivo.",
+        "mainCta" : "Ativar o Ledger Sync",
         "secondCta" : "Já ativei",
         "learnMore" : "Como o Ledger Sync funciona?"
       }
@@ -7238,7 +7294,7 @@
         "unbacked" : {
           "title" : "Sincronização não detectada",
           "description" : "Ative o Ledger Sync nesse Ledger Live ou no qual você está sincronizando.",
-          "cta" : "Ative o Ledger Sync"
+          "cta" : "Ativar o Ledger Sync"
         },
         "unbackedOnboarding" : {
           "title" : "Sincronização não detectada",
@@ -7345,6 +7401,42 @@
     "opted_out" : {
       "description" : "A memória limitada da Ledger Nano S restringe seu acesso aos últimos recursos, mudanças em blockchains e aprimoramentos de segurança. Para uso prolongado, atualize para um dispositivo Ledger mais recente.",
       "cta" : "Saiba mais"
+    }
+  },
+  "largeMover" : {
+    "info" : "Informações",
+    "marketCap" : "Capitalização de mercado",
+    "volume" : "Volume (24h)",
+    "fdv" : "FDV",
+    "marketCap24h" : "Vol/Capital de mercado (24h)",
+    "circulatingSupply" : "Oferta em circulação",
+    "totalSupply" : "Oferta Total",
+    "ath" : "Máxima Histórica",
+    "atl" : "Mínima Histórica",
+    "timeAgo" : {
+      "years" : "(Há {{count}} ano)",
+      "years_plural" : "(Há {{count}} anos)",
+      "months" : "(Há {{count}} mês)",
+      "months_plural" : "(Há {{count}} meses)",
+      "days" : "(há {{count}} dia)",
+      "days_plural" : "(há {{count}} dias)",
+      "hours" : "({{count}} hora atrás)",
+      "hours_plural" : "({{count}} horas atrás)",
+      "minutes" : "({{count}} minuto atrás)",
+      "minutes_plural" : "({{count}} minutos atrás)",
+      "seconds" : "({{count}} segundo atrás)",
+      "seconds_plural" : "({{count}} segundos atrás)"
+    },
+    "performance" : "Desempenho",
+    "low" : "Baixo",
+    "high" : "Alto",
+    "title" : "Movimentações de Mercado"
+  },
+  "nftEntryPoint" : {
+    "title" : "Seus NFTs",
+    "entry" : {
+      "magiceden" : "Magic Eden",
+      "opensea" : "OpenSea"
     }
   }
 }

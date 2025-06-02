@@ -150,6 +150,10 @@ const modes: Readonly<Record<DerivationMode, ModeSpec>> = Object.freeze({
   solanaSub: {
     overridesDerivation: "44'/501'/<account>'",
   },
+  solanaBip44Change: {
+    overridesDerivation: "44'/501'/<account>'/0'",
+    mandatoryEmptyAccountSkip: 10,
+  },
   hederaBip44: {
     overridesDerivation: "44/3030",
   },
@@ -169,6 +173,9 @@ const modes: Readonly<Record<DerivationMode, ModeSpec>> = Object.freeze({
   },
   internet_computer: {
     overridesDerivation: "44'/223'/0'/0/<account>",
+  },
+  minabip44: {
+    overridesDerivation: "44'/12586'/<account>'/0/0",
   },
   stacks_wallet: {
     overridesDerivation: "44'/5757'/0'/0/<account>",
@@ -216,7 +223,7 @@ const legacyDerivations: Partial<Record<CryptoCurrency["id"], DerivationMode[]>>
   ton: ["ton"],
   ethereum: ["ethM", "ethMM"],
   ethereum_classic: ["ethM", "ethMM", "etcM"],
-  solana: ["solanaMain", "solanaSub"],
+  solana: ["solanaMain", "solanaBip44Change", "solanaSub"],
   solana_devnet: ["solanaMain", "solanaSub"],
   solana_testnet: ["solanaMain", "solanaSub"],
   sui: ["sui"],
@@ -374,6 +381,7 @@ const seedIdentifierPath = (currencyId: string): SeedPathFn => {
     case "cardano_testnet":
     case "internet_computer":
     case "vechain":
+    case "mina":
       return ({ purpose, coinType }) => `${purpose}'/${coinType}'/0'/0/0`;
     case "solana":
       return ({ purpose, coinType }) => `${purpose}'/${coinType}'`;

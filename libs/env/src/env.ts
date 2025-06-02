@@ -82,6 +82,11 @@ const envDefinitions = {
     parser: stringParser,
     desc: "Indexer endpoint for Aptos",
   },
+  APTOS_ENABLE_TOKENS: {
+    def: false,
+    parser: boolParser,
+    desc: "Enable tokens on Aptos",
+  },
   API_CASPER_INDEXER_ENDPOINT: {
     parser: stringParser,
     def: "https://casper.coin.ledger.com/indexer",
@@ -847,6 +852,11 @@ const envDefinitions = {
     def: false,
     parser: boolParser,
     desc: "Show a performance overlay on the app UI",
+  },
+  STORAGE_PERFORMANCE_OVERLAY: {
+    def: false,
+    parser: boolParser,
+    desc: "Show a performance overlay on the app storage",
   },
   ETHEREUM_STUCK_TRANSACTION_TIMEOUT: {
     def: 5 * 60 * 1000,

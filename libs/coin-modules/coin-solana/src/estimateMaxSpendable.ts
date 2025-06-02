@@ -1,12 +1,15 @@
 import type { Account, AccountBridge } from "@ledgerhq/types-live";
 import type { SolanaTokenAccount, Transaction } from "./types";
 import BigNumber from "bignumber.js";
-import { ChainAPI } from "./api";
-import { getMaybeTokenMint, getStakeAccountMinimumBalanceForRentExemption } from "./api/chain/web3";
+import { ChainAPI } from "./network";
+import {
+  getMaybeTokenMint,
+  getStakeAccountMinimumBalanceForRentExemption,
+} from "./network/chain/web3";
 import { getMainAccount } from "@ledgerhq/coin-framework/account/index";
 import { estimateTxFee } from "./tx-fees";
 import { calculateToken2022TransferFees } from "./helpers/token";
-import { TransferFeeConfigExt } from "./api/chain/account/tokenExtensions";
+import { TransferFeeConfigExt } from "./network/chain/account/tokenExtensions";
 
 export const estimateFeeAndSpendable = async (
   api: ChainAPI,
@@ -56,7 +59,7 @@ function isTransferTx(tx: Transaction | undefined | null): boolean {
   return !!tx && (tx.model.kind === "token.transfer" || tx.model.kind === "transfer");
 }
 
-export async function extimateTokenMaxSpendable(
+export async function estimateTokenMaxSpendable(
   api: ChainAPI,
   account: SolanaTokenAccount,
   tx?: Transaction | undefined | null,
@@ -100,7 +103,7 @@ export const estimateMaxSpendableWithAPI = async (
     case "Account":
       return (await estimateFeeAndSpendable(api, mainAccount, transaction)).spendable;
     case "TokenAccount":
-      return extimateTokenMaxSpendable(api, account, transaction);
+      return estimateTokenMaxSpendable(api, account, transaction);
   }
 };
 

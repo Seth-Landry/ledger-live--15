@@ -1,5 +1,45 @@
 # @ledgerhq/icons-ui
 
+## 1.14.0
+
+### Minor Changes
+
+- [#10115](https://github.com/LedgerHQ/ledger-live/pull/10115) [`0c268fb`](https://github.com/LedgerHQ/ledger-live/commit/0c268fbc9d08f98b2b383fde36d77e92b5953675) Thanks [@0xukhezo](https://github.com/0xukhezo)! - Add logo for SIDESHIFT XAI token to ledger. Support for tokens was added to ledger live desktop already
+  Contract address (ethereum):
+  SIDESHIFT XAI - 0x35e78b3982E87ecfD5b3f3265B601c046cDBe232
+
+## 1.14.0-next.0
+
+### Minor Changes
+
+- [#10115](https://github.com/LedgerHQ/ledger-live/pull/10115) [`0c268fb`](https://github.com/LedgerHQ/ledger-live/commit/0c268fbc9d08f98b2b383fde36d77e92b5953675) Thanks [@0xukhezo](https://github.com/0xukhezo)! - Add logo for SIDESHIFT XAI token to ledger. Support for tokens was added to ledger live desktop already
+  Contract address (ethereum):
+  SIDESHIFT XAI - 0x35e78b3982E87ecfD5b3f3265B601c046cDBe232
+
+## 1.13.0
+
+### Minor Changes
+
+- [#9888](https://github.com/LedgerHQ/ledger-live/pull/9888) [`de92b67`](https://github.com/LedgerHQ/ledger-live/commit/de92b67ab9c8a553a817a245cecbfe292249d431) Thanks [@palra](https://github.com/palra)! - add babylon currency
+
+## 1.13.0-next.0
+
+### Minor Changes
+
+- [#9888](https://github.com/LedgerHQ/ledger-live/pull/9888) [`de92b67`](https://github.com/LedgerHQ/ledger-live/commit/de92b67ab9c8a553a817a245cecbfe292249d431) Thanks [@palra](https://github.com/palra)! - add babylon currency
+
+## 1.12.0
+
+### Minor Changes
+
+- [#9230](https://github.com/LedgerHQ/ledger-live/pull/9230) [`bf3dec3`](https://github.com/LedgerHQ/ledger-live/commit/bf3dec3eb166f80e066f466e0e03291c9a141a81) Thanks [@lawRathod](https://github.com/lawRathod)! - Add support for mina blockchain
+
+## 1.12.0-next.0
+
+### Minor Changes
+
+- [#9230](https://github.com/LedgerHQ/ledger-live/pull/9230) [`bf3dec3`](https://github.com/LedgerHQ/ledger-live/commit/bf3dec3eb166f80e066f466e0e03291c9a141a81) Thanks [@lawRathod](https://github.com/lawRathod)! - Add support for mina blockchain
+
 ## 1.11.0
 
 ### Minor Changes

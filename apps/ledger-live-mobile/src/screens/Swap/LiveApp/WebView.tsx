@@ -13,14 +13,14 @@ import { getCountryLocale } from "~/helpers/getStakeLabelLocaleBased";
 import { useSettings } from "~/hooks";
 import {
   counterValueCurrencySelector,
-  discreetModeSelector,
   exportSettingsSelector,
   lastSeenDeviceSelector,
 } from "~/reducers/settings";
-import { useSwapLiveAppCustomHandlers } from "./hooks/useSwapLiveAppCustomHandlers";
 import { DefaultAccountSwapParamList } from "../types";
+import { useDispatch } from "react-redux";
 import { useTranslateToSwapAccount } from "./hooks/useTranslateToSwapAccount";
 import { flattenAccountsSelector } from "~/reducers/accounts";
+import { useSwapCustomHandlers } from "./customHandlers";
 
 type Props = {
   manifest: LiveAppManifest;
@@ -29,11 +29,14 @@ type Props = {
 };
 
 export function WebView({ manifest, params, setWebviewState }: Props) {
-  const customHandlers = useSwapLiveAppCustomHandlers(manifest);
+  // Swap duplicated the Custom Handlers due to different needs compared to the rest of the platform apps,
+  // to avoid complexifying the logic in the shared custom handlers.
+  const accounts = useSelector(flattenAccountsSelector);
+  const dispatch = useDispatch();
+  const customHandlers = useSwapCustomHandlers(manifest, accounts, dispatch);
   const { theme } = useTheme();
   const { language } = useSettings();
   const { ticker: currencyTicker } = useSelector(counterValueCurrencySelector);
-  const discreet = useSelector(discreetModeSelector);
   const countryLocale = getCountryLocale();
   const SWAP_API_BASE = useEnv("SWAP_API_BASE");
   const SWAP_USER_IP = useEnv("SWAP_USER_IP");
@@ -63,7 +66,6 @@ export function WebView({ manifest, params, setWebviewState }: Props) {
             countryLocale,
             currencyTicker,
             lastSeenDevice: lastSeenDevice?.modelId,
-            discreetMode: discreet ? "true" : "false",
             OS: Platform.OS,
             platform: "LLM", // need consistent format with LLD, Platform doesn't work
             ...swapParams,

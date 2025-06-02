@@ -10,6 +10,8 @@ import type {
   StakeSplitCommand,
   StakeUndelegateCommand,
   StakeWithdrawCommand,
+  TokenCreateApproveCommand,
+  TokenCreateRevokeCommand,
   TokenTransferCommand,
   Transaction,
   TransferCommand,
@@ -19,7 +21,7 @@ import type { Resolution, SolanaSigner } from "./signer";
 import BigNumber from "bignumber.js";
 import { encodeOperationId } from "@ledgerhq/coin-framework/operation";
 import { assertUnreachable } from "./utils";
-import { ChainAPI } from "./api";
+import { ChainAPI } from "./network";
 import { SignerContext } from "@ledgerhq/coin-framework/signer";
 import { DeviceModelId } from "@ledgerhq/devices";
 
@@ -49,8 +51,11 @@ const buildOptimisticOperation = (account: Account, transaction: Transaction): S
 function getResolution(
   transaction: Transaction,
   deviceModelId?: DeviceModelId,
+  certificateSignatureKind?: "prod" | "test",
 ): Resolution | undefined {
-  if (!transaction.subAccountId || !transaction.model.commandDescriptor) return;
+  if (!transaction.subAccountId || !transaction.model.commandDescriptor) {
+    return;
+  }
 
   const { command } = transaction.model.commandDescriptor;
   switch (command.kind) {
@@ -58,6 +63,7 @@ function getResolution(
       if (command.recipientDescriptor.shouldCreateAsAssociatedTokenAccount) {
         return {
           deviceModelId,
+          certificateSignatureKind,
           createATA: {
             address: command.recipientDescriptor.walletAddress,
             mintAddress: command.mintAddress,
@@ -66,6 +72,7 @@ function getResolution(
       }
       return {
         deviceModelId,
+        certificateSignatureKind,
         tokenAddress: command.recipientDescriptor.tokenAccAddress,
       };
     }
@@ -73,6 +80,7 @@ function getResolution(
     case "token.createATA": {
       return {
         deviceModelId,
+        certificateSignatureKind,
         createATA: {
           address: command.owner,
           mintAddress: command.mint,
@@ -87,7 +95,7 @@ export const buildSignOperation =
     signerContext: SignerContext<SolanaSigner>,
     api: () => Promise<ChainAPI>,
   ): AccountBridge<Transaction>["signOperation"] =>
-  ({ account, deviceId, deviceModelId, transaction }) =>
+  ({ account, deviceId, deviceModelId, transaction, certificateSignatureKind }) =>
     new Observable(subscriber => {
       const main = async () => {
         const [tx, recentBlockhash, signOnChainTransaction] = await buildTransactionWithAPI(
@@ -104,7 +112,7 @@ export const buildSignOperation =
           signer.signTransaction(
             account.freshAddressPath,
             Buffer.from(tx.message.serialize()),
-            getResolution(transaction, deviceModelId),
+            getResolution(transaction, deviceModelId, certificateSignatureKind),
           ),
         );
 
@@ -113,7 +121,6 @@ export const buildSignOperation =
         });
 
         const signedTx = signOnChainTransaction(signature);
-
         subscriber.next({
           type: "signed",
           signedOperation: {
@@ -145,6 +152,10 @@ function buildOptimisticOperationForCommand(
       return optimisticOpForTokenTransfer(account, transaction, command, commandDescriptor);
     case "token.createATA":
       return optimisticOpForCATA(account, commandDescriptor);
+    case "token.approve":
+      return optimisticOpForApprove(account, command, commandDescriptor);
+    case "token.revoke":
+      return optimisticOpForRevoke(account, command, commandDescriptor);
     case "stake.createAccount":
       return optimisticOpForStakeCreateAccount(account, transaction, command, commandDescriptor);
     case "stake.delegate":
@@ -228,6 +239,44 @@ function optimisticOpForCATA(
   };
 }
 
+function optimisticOpForApprove(
+  account: Account,
+  command: TokenCreateApproveCommand,
+  commandDescriptor: CommandDescriptor,
+): SolanaOperation {
+  const opType: OperationType = "FEES";
+
+  return {
+    ...optimisticOpcommons(commandDescriptor),
+    id: encodeOperationId(account.id, "", opType),
+    type: opType,
+    accountId: account.id,
+    senders: [],
+    recipients: [],
+    value: new BigNumber(commandDescriptor.fee),
+    extra: getOpExtras(command),
+  };
+}
+
+function optimisticOpForRevoke(
+  account: Account,
+  command: TokenCreateRevokeCommand,
+  commandDescriptor: CommandDescriptor,
+): SolanaOperation {
+  const opType: OperationType = "FEES";
+
+  return {
+    ...optimisticOpcommons(commandDescriptor),
+    id: encodeOperationId(account.id, "", opType),
+    type: opType,
+    accountId: account.id,
+    senders: [],
+    recipients: [],
+    value: new BigNumber(commandDescriptor.fee),
+    extra: getOpExtras(command),
+  };
+}
+
 function optimisticOpcommons(commandDescriptor: CommandDescriptor) {
   return {
     hash: "",
@@ -249,6 +298,8 @@ function getOpExtras(command: Command): SolanaOperationExtra {
       }
       break;
     case "token.createATA":
+    case "token.approve":
+    case "token.revoke":
     case "stake.createAccount":
     case "stake.delegate":
     case "stake.undelegate":

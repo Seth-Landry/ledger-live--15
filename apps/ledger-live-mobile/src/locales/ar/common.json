@@ -4,6 +4,8 @@
   },
   "common" : {
     "cancel" : "إلغاء",
+    "copy" : "نسخ",
+    "copied" : "تم النسخ",
     "apply" : "تقديم",
     "seeAll" : "رؤية الكل",
     "seeAllWithNumber" : "رؤية الكل ({{number}})",
@@ -100,7 +102,8 @@
       "times" : "x{{ value }}"
     },
     "quote" : "عرض أسعار",
-    "tryAgain" : "إعادة المحاولة"
+    "tryAgain" : "إعادة المحاولة",
+    "ldmkEnabled" : "تم تمكين نقل LDMK"
   },
   "errors" : {
     "ReplacementTransactionUnderpriced" : {
@@ -508,6 +511,10 @@
     },
     "NotEnoughBalance" : {
       "title" : "عفواً، الأموال المتوفرة غير كافية",
+      "description" : "يرجى التأكد من أن الحساب به أموال كافية."
+    },
+    "NotEnoughBalanceFees" : {
+      "title" : "عذراً، الأموال غير كافية لتغطية الرسوم",
       "description" : "يرجى التأكد من أن الحساب به أموال كافية."
     },
     "NotEnoughBalanceForUnstaking" : {
@@ -1060,6 +1067,15 @@
     },
     "AppManifestNotFoundError" : {
       "title" : "فشل تحميل تطبيق Swap Live"
+    },
+    "InvalidMemoMina" : {
+      "title" : "نص علامة الملاحظة (تسمية الوجهة) لا يمكن أن يكون أطول من 32 حرفاً"
+    },
+    "AccountCreationFeeWarning" : {
+      "title" : "هذه المعاملة ستُكلّف رسوم إنشاء حساب بقيمة {{fee}}"
+    },
+    "AmountTooSmall" : {
+      "title" : "الحد الأدنى للمبلغ المطلوب لهذه المعاملة هو {{amount}}"
     }
   },
   "crash" : {
@@ -1090,6 +1106,32 @@
     "openSettings" : "افتح إعدادات الموقع",
     "tryEnablingAgain" : "حاول تمكين الموقع مرة أخرى",
     "noInfos" : "Ledger لا تقوم بالوصول إلى معلومات موقعك."
+  },
+  "earn" : {
+    "deposit" : {
+      "protocolInfoModal" : {
+        "title" : "لاختيار بروتوكول، إليك بعض الأشياء الواجب أخذها في الاعتبار:",
+        "items" : {
+          "protocol" : {
+            "highlighted" : "البروتوكول",
+            "description" : " هو منصة تسمح لك بالحصول على مكافآت باستخدام أصولك المشفرة المودعة من أجل الإقراض أو السيولة أو التكديس."
+          },
+          "apy" : {
+            "highlighted" : "المردود المئوي السنوي (APY)",
+            "description" : " هو مقدار الفائدة التي يمكنك كسبها خلال عام واحد. المردود المئوي السنوي (APY) الأعلى يعني إيرادات أعلى."
+          },
+          "tvl" : {
+            "highlighted" : "إجمالي القيمة المُقفلة (TVL)",
+            "description" : " هو إجمالي النقود المودعة في البروتوكول بواسطة المستخدمين الآخرين. إجمالي القيمة المُقفلة الأعلى يعني أن البروتوكول يثق فيه عدد أكبر من الأشخاص."
+          },
+          "strategy" : {
+            "highlighted" : "الاستراتيجية",
+            "description0" : " هي الطريقة التي يستخدمها بروتوكول لتوليد المكافآت من أجلك.",
+            "description1" : "على سبيل المثال، إذا استخدم بروتوكول الإقراض كاستراتيجية له، فإنه يقرض عملاتك المستقرة المودعة للمقترضين. عندها تكسب فائدةً تختلف بناءً على الطلب."
+          }
+        }
+      }
+    }
   },
   "permissions" : {
     "open" : "فتح تصريحات التطبيق",
@@ -2590,7 +2632,8 @@
       "gasLimit" : "حد الغاز",
       "id" : "المُعرّف",
       "autoClaimedRewards" : "المكافآت المطالب بها تلقائياً",
-      "stakedAmount" : "المبلغ المُكدَّس"
+      "stakedAmount" : "المبلغ المُكدَّس",
+      "accountCreationFee" : "رسوم إنشاء الحساب"
     },
     "multipleAddresses" : "لماذا عناوين متعددة؟",
     "tokenName" : "اسم رمز التوكن",
@@ -3526,6 +3569,8 @@
         "contact_support" : "تواصل مع دعم العملاء",
         "ton_title" : "™Ledger Nano S لا تدعم مبادلة Ton",
         "ton_description" : "لمبادلة Ton، استخدِم أي جهاز Ledger آخر متوافق مثل ™Ledger Nano S Plus أو ™Ledger Nano X أو ™Ledger Flex أو ™Ledger Stax.",
+        "ton_tokens_title" : "™Ledger Nano S لا تدعم مبادلة رموز Ton",
+        "ton_tokens_description" : "لمبادلة رموز Ton، استخدِم أي جهاز Ledger متوافق آخر مثل ™Ledger Nano S Plus أو ™Ledger Nano X أو ™Ledger Flex أو ™Ledger Stax.",
         "spl_tokens_title" : "™Ledger Nano S لا تدعم مبادلة رموز سولانا (Solana)",
         "spl_tokens_description" : "لمبادلة رموز سولانا (Solana)، استخدِم أي جهاز Ledger آخر متوافق مثل ™Ledger Nano S Plus أو ™Ledger Nano X أو ™Ledger Flex أو ™Ledger Stax.",
         "near_title" : "™Ledger Nano S لا تدعم مبادلة Near",
@@ -3806,6 +3851,9 @@
         }
       }
     },
+    "spl2022" : {
+      "splExtensionsWarning" : "أنت تتفاعل مع رمز توكن يشكل جزءاً من برنامج Token-2022، المعروف أيضاً باسم Token Extensions (ملحقات رموز التوكن). رمز التوكن هذا يأتي مع مخاطر محددة. <0>انقر هنا</0> لمعرفة المزيد."
+    },
     "amount" : {
       "available" : "إجمالي المتاح",
       "useMax" : "استخدم الحد الأقصى",
@@ -4047,7 +4095,9 @@
       "desc" : "هل أنت متأكد أنك تريد إلغاء إضافة حسابات؟",
       "v2" : {
         "title" : "إلغاء إضافة حساب؟",
-        "desc" : "لن يتم إضافة أي حساب إلى Ledger Live."
+        "desc" : "لن يتم إضافة أي حساب إلى Ledger Live.",
+        "continue" : "متابعة الإضافة",
+        "cancel" : "إلغاء"
       }
     },
     "imported" : "تمت إضافة الأصل بنجاح",
@@ -4085,7 +4135,7 @@
       "title" : "إضافة رمز توكن",
       "createParentCurrencyAccount" : "أضف حساب {{parrentCurrencyName}}",
       "generic" : {
-        "disclaimer" : "{{token}} ({{ticker}}) هو رمز {{tokenType}}.\nيمكنك تلقي رموز التوكن مباشرةً على حساب {{currency}}.",
+        "disclaimer" : "{{token}} ({{ticker}}) هو رمز {{tokenType}}.\nيمكنك تلقي رموز التوكن مباشرةً في حساب {{currency}}.",
         "learnMore" : "تعرف على المزيد عن {{tokenType}}"
       }
     },
@@ -4656,7 +4706,7 @@
   },
   "FirmwareUpdateReleaseNotes" : {
     "introTitle" : "قم بتحديث {{deviceName}} إلى الإصدار {{version}}",
-    "recoveryPhraseBackupInstructions" : "تأكد من كتابة عبارة الاسترداد الخاصة بك المكونة من 24 كلمة على ورقة الاسترداد وأنها متوفرة، على سبيل الاحتياط.",
+    "recoveryPhraseBackupInstructions" : "تأكد من كتابة عبارة الاسترداد السرية الخاصة بك المكونة من 24 كلمة على ورقة الاسترداد وأنها متاحة، على سبيل الاحتياط.\n\nفكّر في استخدام Ledger Recover لعمل نسخ احتياطي للوصول إلى محفظتك وضمان أنها دائماً في المتناول.",
     "confirmRecoveryPhrase" : "لدي عبارة الاسترداد الخاصة بي",
     "introDescription1" : "يرجى ملاحظة أنه سيتم حذف جميع التطبيقات الموجودة على جهازك. يمكنك إعادة تثبيت تطبيقاتك بعد تحديث البرنامج الثابت.",
     "introDescription2" : "ليس لذلك أي تأثير على أصولك المشفرة.",
@@ -6041,6 +6091,7 @@
       "transferFees" : {
         "title" : "رسوم التحويل",
         "feesPercentHint" : "رمز التوكن عليه رسوم تحويل %{{feePercent}} ({{feeBps}} نقطة أساس) ({{maxFee}} بحد أقصى)",
+        "feesHint" : "رسوم تحويل رمز التوكن: {{transferFee}}",
         "notice" : "رسوم التحويل %{{fee}}",
         "tooltipHint" : "النسبة المئوية من التحويل المحتجزة من أجل منشئ رمز التوكن"
       },
@@ -6099,6 +6150,9 @@
         }
       }
     }
+  },
+  "mina" : {
+    "memoPlaceholder" : "ملاحظة اختيارية"
   },
   "near" : {
     "info" : {
@@ -6425,7 +6479,9 @@
     },
     "stepVerification" : {
       "action" : "يرجى تأكيد العملية على جهازك",
-      "accountName" : "اسم الحساب"
+      "accountName" : "اسم الحساب",
+      "title" : "تابع على جهازك Ledger {{wording}}",
+      "description" : "اتبع التعليمات المعروضة على شاشتك الآمنة التي تعمل باللمس."
     }
   },
   "notificationCenter" : {
@@ -6609,8 +6665,8 @@
       "7d" : "7 أيام",
       "30d" : "30 يوم",
       "1y" : "1 سنة",
-      "1H_label" : "1 ساعة",
       "1D_label" : "1 يوم",
+      "1H_label" : "1 ساعة",
       "1W_label" : "1 أسبوع",
       "1M_label" : "1 شهر",
       "1Y_label" : "1 سنة"
@@ -7345,6 +7401,42 @@
     "opted_out" : {
       "description" : "الذاكرة المحدودة في ledger Nano S الخاصة بك تُقيد وصولك إلى أحدث الميزات، ومتغيّرات سلاسل الكتل، وتحسينات الأمان. من أجل الاستخدام على المدى الطويل، قم بالترقية إلى جهاز Ledger أحدث.",
       "cta" : "تعرّف على المزيد"
+    }
+  },
+  "largeMover" : {
+    "info" : "معلومات",
+    "marketCap" : "سقف أسعار السوق (Market Cap)",
+    "volume" : "حجم التداول (24 ساعة)",
+    "fdv" : "التقييم المُخفّف بالكامل (FDV)",
+    "marketCap24h" : "حجم التداول/القيمة السوقية (24 ساعة)",
+    "circulatingSupply" : "التوريد المتداول",
+    "totalSupply" : "إجمالي التوريد",
+    "ath" : "الحد الأقصى التاريخي",
+    "atl" : "الحد الأدنى التاريخي",
+    "timeAgo" : {
+      "years" : "(منذ {{count}} سنة)",
+      "years_plural" : "(منذ {{count}} سنة)",
+      "months" : "(منذ {{count}} شهر)",
+      "months_plural" : "(منذ {{count}} شهر)",
+      "days" : "(منذ {{count}} يوم)",
+      "days_plural" : "(منذ {{count}} يوم)",
+      "hours" : "(منذ {{count}} ساعة)",
+      "hours_plural" : "(منذ {{count}} ساعة)",
+      "minutes" : "(منذ {{count}} دقيقة)",
+      "minutes_plural" : "(منذ {{count}} دقيقة)",
+      "seconds" : "(منذ {{count}} ثانية)",
+      "seconds_plural" : "(منذ {{count}} ثانية)"
+    },
+    "performance" : "الأداء",
+    "low" : "منخفض",
+    "high" : "مرتفع",
+    "title" : "تحركات السوق"
+  },
+  "nftEntryPoint" : {
+    "title" : "رموزك غير القابلة للاستبدال (NFTs)",
+    "entry" : {
+      "magiceden" : "Magic Eden",
+      "opensea" : "OpenSea"
     }
   }
 }
