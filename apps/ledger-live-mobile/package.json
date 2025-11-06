@@ -244,7 +244,7 @@
     "@ledgerhq/live-common": "workspace:^",
     "@ledgerhq/speculos-transport": "workspace:^",
     "@ledgerhq/test-utils": "workspace:^",
-    "@react-native-community/cli": "14.1.0",
+    "@react-native-community/cli": "20.0.0",
     "@react-native-community/cli-platform-android": "14.1.0",
     "@react-native-community/cli-platform-ios": "14.1.0",
     "@react-native/babel-preset": "0.75.4",
