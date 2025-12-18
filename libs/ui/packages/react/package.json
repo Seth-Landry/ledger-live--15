@@ -143,7 +143,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "rimraf": "^4.4.1",
-    "storybook": "^8.6.12",
+    "storybook": "^8.6.15",
     "styled-components": "^5.3.3",
     "stylelint": "^14.9.1",
     "stylelint-config-recommended": "^13.0.0",
